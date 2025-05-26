@@ -1,20 +1,16 @@
+const sequelize = require('../db/schema.js');
 const ticket = require("./ticket")
 const agent = require("./agent")
 const requester = require("./requester")
 const comment = require("./comment")
 
-agent.hasMany(ticket)
-requester.hasMany(ticket)
-ticket.hasMany(comment)
+ticket.belongsTo(agent, { foreignKey: 'agent_id' });
+agent.hasMany(ticket, { foreignKey: 'agent_id' });
 
-ticket.belongsTo(agent)
-ticket.belongsTo(requester)
+ticket.belongsTo(requester, { foreignKey: 'requester_id' });
+requester.hasMany(ticket, { foreignKey: 'requester_id' });
 
-comment.belongsTo(ticket)
+ticket.hasMany(comment, { foreignKey: 'ticket_id' });
+comment.belongsTo(ticket, { foreignKey: 'ticket_id' });
 
-module.exports = {
-    ticket,
-    agent,
-    requester,
-    comment
-}
+module.exports = { ticket, agent, requester, comment };

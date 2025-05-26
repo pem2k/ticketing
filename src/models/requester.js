@@ -1,8 +1,7 @@
 const { Model, DataTypes } = require('sequelize')
 
 const sequelize = require('../config/connection.js');
-
-class requester extends Model {}
+const bcrypt = require('bcrypt');
 
 class requester extends Model {
     async setPassword(password) {
@@ -18,7 +17,7 @@ async validatePassword(password) {
 
 requester.init(
     { 
-        id: {
+        requester_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,

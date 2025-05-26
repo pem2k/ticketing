@@ -16,7 +16,7 @@ async validatePassword(password) {
 
 agent.init(
     { 
-        id: {
+        agent_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,

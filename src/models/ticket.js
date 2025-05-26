@@ -6,7 +6,7 @@ class ticket extends Model {}
 
 ticket.init({ 
 
-  id: {
+  ticket_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
@@ -38,7 +38,7 @@ ticket.init({
     type: DataTypes.INTEGER,
     references: {
       model: 'agent',
-      key: 'id'
+      key: 'agent_id'
     }
   },
 
@@ -46,7 +46,7 @@ ticket.init({
     type: DataTypes.INTEGER,
     references: {
       model: 'requester',
-      key: 'id'
+      key: 'requester_id'
     }
   },
 
