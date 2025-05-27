@@ -8,6 +8,11 @@ const { Ticket, Agent, Requester, Comment } = require("../models")
 //get routes
 
 //get all tickets
+
+router.get('/test', async (req, res) => {
+  res.json({ message: 'Agent test route' });
+})
+
 router.get("/", async (req, res) => {
     try {
         const ticketData = await Ticket.findAll({

@@ -1,14 +1,14 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const JwtStrategy = require('passport-jwt').Strategy
-const Agent = require('./models/Agent')
-const Requester = require('./models/Requester')
+const agent = require('../models/agent')
+const requester = require('../models/requester')
 
 passport.use('agent-local', new LocalStrategy({
   usernameField: 'agent_email',
   passwordField: 'password'
 }, (agent_email, password, done) => {
-  Agent.findOne({ where: { agent_email } })
+  agent.findOne({ where: { agent_email } })
     .then((agent) => {
       if (!agent) return done(null, false)
       agent.comparePassword(password, (err, isMatch) => {
@@ -41,7 +41,7 @@ passport.use('agent-jwt', new JwtStrategy({
   secretOrKey: 'your-secret-key',
   algorithms: ['HS256']
 }, (payload, done) => {
-  Agent.findByPk(payload.sub)
+  agent.findByPk(payload.sub)
     .then((agent) => {
       if (!agent) return done(null, false)
       return done(null, agent)
@@ -81,3 +81,5 @@ passport.deserializeUser((id, done) => {
     })
     .catch((err) => done(err))
 })
+
+module.exports = passport
