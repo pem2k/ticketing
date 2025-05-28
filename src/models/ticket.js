@@ -11,7 +11,20 @@ ticket.init({
     primaryKey: true,
     autoIncrement: true
   },
-
+  agent_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'agent',
+      key: 'agent_id'
+    }
+  },
+  requester_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'requester',
+      key: 'requester_id'
+    }
+  },
   title: {
     type: DataTypes.STRING,
     allowNull: false
